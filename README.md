@@ -6,4 +6,5 @@ This feed was built to replace the Live Traffic Disruptions (LTIS) feed, which w
 
 The structure and the content of the new feed has been changed to capture a richer range of information about road disruptions, including improved spatial information, details of closures and more in-depth categorisation of the cause of a disruption.
 
-
+![alt tag](http://res.cloudinary.com/dfv0udnzw/image/upload/v1471464706/fishbuoy/Disruptions_Map.png
+)
