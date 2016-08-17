@@ -1,3 +1,4 @@
+![alt tag](https://travis-ci.org/pomidorus/DisruptionsMap.svg)
 # Disruptions Map
 
 http://data.tfl.gov.uk/tfl/syndication/feeds/tims_feed.xml?app_id=&app_key=
