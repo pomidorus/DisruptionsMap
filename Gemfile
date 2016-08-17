@@ -7,6 +7,7 @@ gem 'pg', '~> 0.18'
 
 gem 'autoprefixer-rails'
 gem 'coffee-rails', '~> 4.2'
+gem 'grape'
 gem 'jbuilder', '~> 2.5'
 gem 'leaflet-rails'
 gem 'puma', '~> 3.0'
