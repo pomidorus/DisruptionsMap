@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "required": ["markers"],
+  "properties": {
+    "markers" : {
+      "type" : "array",
+      "items": {
+        "title": "Marker",
+        "type": "object",
+        "properties": {
+          "latlng": {
+            "type": "array",
+            "items": {
+              "title": "Value",
+              "type": "number"
+            }
+          },
+          "popup": {"type": "string"}
+        }
+      }
+    }
+  }
+}
