@@ -11,6 +11,7 @@ gem 'ice_cube'
 gem 'grape'
 gem 'jbuilder', '~> 2.5'
 gem 'leaflet-rails'
+gem 'nokogiri'
 gem 'puma', '~> 3.0'
 gem 'react-rails'
 gem 'sass-rails', '~> 5.0'
@@ -33,6 +34,7 @@ gem 'haml-rails', '~> 0.9'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.5'
 end

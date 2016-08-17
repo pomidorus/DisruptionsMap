@@ -1,0 +1,3 @@
+class Disruption < ApplicationRecord
+
+end
