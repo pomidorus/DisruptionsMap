@@ -1,3 +1,37 @@
 %section.disruptions-map
-  = map(center: {latlng: [51.503509, 0.001312], zoom: 18},
-        markers: [{latlng: [51.503509, 0.001312], popup: 'Traffic is heavy and slow moving on A12 southbound and A13 westbound towards the southbound tunnel. A12 tailback through Eastway Tunnel to Ruckholt Road (Olympic Park). A13 tailback to Goresbrook Interchange at Dagenham. A102 northbound traffic is queuing from Sun In The Sands Roundabout.'}])
+  = map(center: {latlng: [51.503509, 0.001312], zoom: 18})
+
+:javascript
+  document.addEventListener("DOMContentLoaded", function(event) {
+    function draw_markers(response) {
+      var data = JSON.parse(response);
+      var markers = data['markers'];
+      for (var i = 0; i < markers.length; i++) {
+        var marker = markers[i];
+        var latlng = marker['latlng'];
+        var popup = marker['popup'];
+        var lat = latlng[0];
+        var lng = latlng[1];
+        L.marker([lat, lng]).addTo(map).bindPopup(popup);
+      }
+    }
+
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+        if (xmlhttp.status == 200) {
+          draw_markers(xmlhttp.responseText);
+        }
+        else if (xmlhttp.status == 400) {
+          console.log('There was an error 400');
+          //catch requests in api endpoint like post /api/requests {valid:true, data:...}
+        }
+        else {
+          //catch requests in api endpoint like post /api/requests {valid:false, data:...}
+          console.log('something else other than 200 was returned');
+        }
+      }
+    };
+    xmlhttp.open("GET", "/api/disruptions", true);
+    xmlhttp.send();
+  });
