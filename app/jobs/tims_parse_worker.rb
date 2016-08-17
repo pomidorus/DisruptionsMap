@@ -2,7 +2,7 @@ class TimsParseWorker
   include Sidekiq::Worker
   include Sidetiq::Schedulable
 
-  recurrence { minutely(5) }
+  recurrence { minutely(1) }
 
   def perform
     disruptions = TimsParser.run
