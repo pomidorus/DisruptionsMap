@@ -3,35 +3,48 @@
 
 :javascript
   document.addEventListener("DOMContentLoaded", function(event) {
+    var disruptions_layer = L.layerGroup([]);
+
     function draw_markers(response) {
+      disruptions_layer.clearLayers();
       var data = JSON.parse(response);
       var markers = data['markers'];
+      var map_markers = [];
       for (var i = 0; i < markers.length; i++) {
         var marker = markers[i];
         var latlng = marker['latlng'];
         var popup = marker['popup'];
         var lat = latlng[0];
         var lng = latlng[1];
-        L.marker([lat, lng]).addTo(map).bindPopup(popup);
+        var map_marker = L.marker([lat, lng]).bindPopup(popup);
+        map_markers.push(map_marker);
       }
+        disruptions_layer = L.layerGroup(map_markers).addTo(map);
     }
 
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-      if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
-        if (xmlhttp.status == 200) {
-          draw_markers(xmlhttp.responseText);
+    function repeat_data_polling() {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+          if (xmlhttp.status == 200) {
+            draw_markers(xmlhttp.responseText);
+            setTimeout(repeat_data_polling, 300000);
+          }
+          else if (xmlhttp.status == 400) {
+            console.log('There was an error 400');
+            setTimeout(repeat_data_polling, 300000);
+            //catch requests in api endpoint like post /api/requests {valid:true, data:...}
+          }
+          else {
+            setTimeout(repeat_data_polling, 300000);
+            //catch requests in api endpoint like post /api/requests {valid:false, data:...}
+            console.log('something else other than 200 was returned');
+          }
         }
-        else if (xmlhttp.status == 400) {
-          console.log('There was an error 400');
-          //catch requests in api endpoint like post /api/requests {valid:true, data:...}
-        }
-        else {
-          //catch requests in api endpoint like post /api/requests {valid:false, data:...}
-          console.log('something else other than 200 was returned');
-        }
-      }
-    };
-    xmlhttp.open("GET", "/api/disruptions", true);
-    xmlhttp.send();
+      };
+      xmlhttp.open("GET", "/api/disruptions", true);
+      xmlhttp.send();
+    }
+
+    repeat_data_polling();
   });
