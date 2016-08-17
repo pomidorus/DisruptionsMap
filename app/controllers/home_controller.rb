@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    TimsParseJob.perform_later
+    TimsParseWorker.perform_async
   end
 end
