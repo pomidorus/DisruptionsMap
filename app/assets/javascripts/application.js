@@ -10,7 +10,8 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require leaflet
 //= require react
-//= require react_ujs
 //= require turbolinks
+//= require react_ujs
 //= require_tree .

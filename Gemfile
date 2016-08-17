@@ -7,6 +7,7 @@ gem 'pg', '~> 0.18'
 
 gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder', '~> 2.5'
+gem 'leaflet-rails'
 gem 'puma', '~> 3.0'
 gem 'react-rails'
 gem 'sass-rails', '~> 5.0'
